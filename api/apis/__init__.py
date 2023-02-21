@@ -6,9 +6,9 @@ from .design_two import api as ns2
 
 # api metadata
 api = Api(
-	version="1.0",
-	title="Design Patterns",
-	description="API to utilize different design patterns",
+    version="1.0",
+    title="Design Patterns",
+    description="API to utilize different design patterns",
 )
 
 # add namespaces to app
