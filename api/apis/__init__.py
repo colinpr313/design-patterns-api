@@ -1,7 +1,7 @@
 from flask_restx import Api
 
 # import seperate api namespces
-from .desgin_one import api as ns1
+from .strategy_pattern import api as ns1
 from .design_two import api as ns2
 
 # api metadata
