@@ -47,6 +47,9 @@ class Duck(Resource):
                 HTTPStatus.OK,
             )
         return make_response(
-            "Invalid duck name. check /Strategy Pattern/list_ducks for all valid duck names",
+            (
+                "Invalid duck name. check /Strategy Pattern/list_ducks"
+                "for all valid duck names"
+            ),
             HTTPStatus.BAD_REQUEST,
         )
