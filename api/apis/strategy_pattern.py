@@ -53,7 +53,8 @@ class Duck(Resource):
             ),
             HTTPStatus.BAD_REQUEST,
         )
-    
+
+
 @api.route("/quack")
 @api.param("name", "The duck's name")
 class Quack(Resource):
@@ -62,10 +63,7 @@ class Quack(Resource):
         name = request.args.get("name", None)
         duck = DUCKS.get(name, None)
         if duck:
-            return make_response(
-                duck.quack(),
-                HTTPStatus.OK
-            )
+            return make_response(duck.quack(), HTTPStatus.OK)
         return make_response(
             (
                 "Invalid duck name. check /Strategy Pattern/list_ducks"
@@ -73,7 +71,8 @@ class Quack(Resource):
             ),
             HTTPStatus.BAD_REQUEST,
         )
-    
+
+
 @api.route("/fly")
 @api.param("name", "The duck's name")
 class Fly(Resource):
@@ -82,10 +81,7 @@ class Fly(Resource):
         name = request.args.get("name", None)
         duck = DUCKS.get(name, None)
         if duck:
-            return make_response(
-                duck.fly(),
-                HTTPStatus.OK
-            )
+            return make_response(duck.fly(), HTTPStatus.OK)
         return make_response(
             (
                 "Invalid duck name. check /Strategy Pattern/list_ducks"
@@ -93,7 +89,8 @@ class Fly(Resource):
             ),
             HTTPStatus.BAD_REQUEST,
         )
-    
+
+
 @api.route("/swim")
 @api.param("name", "The duck's name")
 class Swim(Resource):
@@ -102,10 +99,7 @@ class Swim(Resource):
         name = request.args.get("name", None)
         duck = DUCKS.get(name, None)
         if duck:
-            return make_response(
-                duck.swim(),
-                HTTPStatus.OK
-            )
+            return make_response(duck.swim(), HTTPStatus.OK)
         return make_response(
             (
                 "Invalid duck name. check /Strategy Pattern/list_ducks"
@@ -113,5 +107,3 @@ class Swim(Resource):
             ),
             HTTPStatus.BAD_REQUEST,
         )
-    
-
