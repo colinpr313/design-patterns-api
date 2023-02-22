@@ -1,5 +1,6 @@
 import abc
 
+
 class Duck(abc.ABC):
     def __init__(self):
         pass
@@ -19,10 +20,12 @@ class Duck(abc.ABC):
     def swim(self):
         return "All ducks float, even decoys!"
 
+
 class FlyBehavior(abc.ABC):
     @abc.abstractmethod
     def fly(self):
         pass
+
 
 class QuackBehavior(abc.ABC):
     @abc.abstractmethod

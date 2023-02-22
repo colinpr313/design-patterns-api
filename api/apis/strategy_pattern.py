@@ -1,13 +1,15 @@
 import sys
 from http import HTTPStatus
 from flask import make_response
-from flask_restx import Namespace, Resource, fields
+from flask_restx import Namespace, Resource
 
-sys.path.insert(0,'../..')
+sys.path.insert(0, "../..")
 import design_patterns_api.strategy_pattern.duck_classes as ducks
 
 # namespace metadata - title and description
-api = Namespace("Strategy Pattern", description="Create ducks using the strategy pattern")
+api = Namespace(
+    "Strategy Pattern", description="Create ducks using the strategy pattern"
+)
 
 DUCKS = {
     "mallard duck": ducks.MallardDuck(),
@@ -23,26 +25,24 @@ class DuckList(Resource):
         """List all ducks"""
         return make_response(
             f"Here are all of the different ducks: {', '.join(list(DUCKS.keys()))}",
-            HTTPStatus.OK
+            HTTPStatus.OK,
         )
 
 
 @api.route("/fetch_duck/<name>")
 @api.param("name", "The duck's name")
-
 class Duck(Resource):
     @api.doc("get_duck")
     def get(self, name):
         """Fetch a duck given its name"""
         duck = DUCKS.get(name, None)
-        if duck: 
+        if duck:
             return make_response(
                 {
                     "name": duck.name,
                     "fly": duck.fly(),
                     "quack": duck.quack(),
-                    "swim": duck.swim()
-
+                    "swim": duck.swim(),
                 },
                 HTTPStatus.OK,
             )
