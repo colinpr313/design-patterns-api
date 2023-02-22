@@ -1,6 +1,6 @@
 import sys
 from http import HTTPStatus
-from flask import make_response
+from flask import make_response, request
 from flask_restx import Namespace, Resource
 
 sys.path.insert(0, "../..")
@@ -29,12 +29,12 @@ class DuckList(Resource):
         )
 
 
-@api.route("/fetch_duck/<name>")
+@api.route("/fetch_duck")
 @api.param("name", "The duck's name")
 class Duck(Resource):
-    @api.doc("get_duck")
-    def get(self, name):
+    def get(self):
         """Fetch a duck given its name"""
+        name = request.args.get("name", None)
         duck = DUCKS.get(name, None)
         if duck:
             return make_response(
@@ -53,3 +53,65 @@ class Duck(Resource):
             ),
             HTTPStatus.BAD_REQUEST,
         )
+    
+@api.route("/quack")
+@api.param("name", "The duck's name")
+class Quack(Resource):
+    def get(self):
+        """Make a duck quack"""
+        name = request.args.get("name", None)
+        duck = DUCKS.get(name, None)
+        if duck:
+            return make_response(
+                duck.quack(),
+                HTTPStatus.OK
+            )
+        return make_response(
+            (
+                "Invalid duck name. check /Strategy Pattern/list_ducks"
+                "for all valid duck names"
+            ),
+            HTTPStatus.BAD_REQUEST,
+        )
+    
+@api.route("/fly")
+@api.param("name", "The duck's name")
+class Fly(Resource):
+    def get(self):
+        """Make a duck fly"""
+        name = request.args.get("name", None)
+        duck = DUCKS.get(name, None)
+        if duck:
+            return make_response(
+                duck.fly(),
+                HTTPStatus.OK
+            )
+        return make_response(
+            (
+                "Invalid duck name. check /Strategy Pattern/list_ducks"
+                "for all valid duck names"
+            ),
+            HTTPStatus.BAD_REQUEST,
+        )
+    
+@api.route("/swim")
+@api.param("name", "The duck's name")
+class Swim(Resource):
+    def get(self):
+        """Make a duck swim"""
+        name = request.args.get("name", None)
+        duck = DUCKS.get(name, None)
+        if duck:
+            return make_response(
+                duck.swim(),
+                HTTPStatus.OK
+            )
+        return make_response(
+            (
+                "Invalid duck name. check /Strategy Pattern/list_ducks"
+                "for all valid duck names"
+            ),
+            HTTPStatus.BAD_REQUEST,
+        )
+    
+
